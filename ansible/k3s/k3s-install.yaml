@@ -12,4 +12,7 @@
         dest: /etc/rancher/k3s/config.yaml
 
     - name: Install & Start K3s
-      shell: curl -sfL https://get.k3s.io | sh -
+      command: curl -sfL https://get.k3s.io | sh -
+
+    - name: Set KUBECONFIG
+      command: export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
