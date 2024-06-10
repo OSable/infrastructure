@@ -1,0 +1,15 @@
+- name: K3s installation playbook
+  hosts: localhost
+  tasks:
+    - name: Create path for k3s install config
+      file:
+        path: /etc/rancher/k3s
+        state: directory
+
+    - name: Copy K3s installation config
+      copy:
+        src: ./k3s-config.yaml
+        dest: /etc/rancher/k3s/config.yaml
+
+    - name: Install & Start K3s
+      shell: curl -sfL https://get.k3s.io | sh -

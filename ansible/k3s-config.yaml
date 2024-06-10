@@ -1,0 +1,16 @@
+#K3s installation configuration
+
+# Cluster config
+cluster-cidr: "10.42.0.0/16"           # Pod address space
+service-cidr: "10.43.0.0/16"           # Service address space
+cluster-dns: "10.43.0.10"              # CoreDNS address
+
+# Calico required configuration
+flannel-backend: none                  # Disable Flannel CNI
+disable-network-policy: true           # Disable default network policy
+
+# Etc
+disable:
+  - servicelb                          # Disable ServiceLB in favour of MetalLB
+secrets-encryption: true               # Enable encryption of secrets at rest
+service-node-port-range: "0-6553"      # Allow node ports on any port

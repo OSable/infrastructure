@@ -1,0 +1,8 @@
+- name: K3s uninstallation playbook
+  hosts: localhost
+  tasks:
+    - name: K3s killall
+      command: sh /usr/local/bin/k3s-killall.sh
+
+    - name: Uninstall K3s
+      command: sh /usr/local/bin/k3s-uninstall.sh
