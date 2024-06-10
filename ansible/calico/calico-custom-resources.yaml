@@ -1,0 +1,23 @@
+# Configures Calico
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  variant: Calico
+  calicoNetwork:
+    linuxDataplane: BPF
+    ipPools:
+      - blockSize: 26
+        cidr: 10.42.0.0/16
+        encapsulation: VXLANCrossSubnet
+        natOutgoing: Enabled
+        nodeSelector: all()
+
+---
+# Configures the Calico APIServer
+apiVersion: operator.tigera.io/v1
+kind: APIServer
+metadata:
+  name: default
+spec: {}

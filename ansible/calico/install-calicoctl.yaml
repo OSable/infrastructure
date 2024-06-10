@@ -1,0 +1,13 @@
+- name: Install calicoctl
+  hosts: localhost
+  tasks:
+    - name: Download calicoctl binary
+      command: curl -L https://github.com/projectcalico/calico/releases/download/v3.28.0/calicoctl-linux-amd64 -o calicoctl
+
+    - name: Mark calicoctl binary executable
+      command: chmod +x ./calicoctl
+
+    - name: Move calicoctl binary into /usr/local/bin
+      copy:
+        src: ./calicoctl
+        dest: /usr/local/bin/calicoctl

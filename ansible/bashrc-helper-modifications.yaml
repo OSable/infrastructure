@@ -1,0 +1,18 @@
+- name: .bashrc helper modifications
+  hosts: localhost
+  tasks:
+    - name: Add kubedebug, kubeexec and kubens to .bashrc
+      lineinfile:
+        dest: "~/.bashrc"
+        line: |
+          kubedebug() {
+              kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
+          }
+
+          kubexec() {
+              pod = $1
+              shift
+              kubectl exec --stdin --tty $pod "$@" -- /bin/sh
+          }
+
+          alias kubens='kubectl config set-context --current --namespace'

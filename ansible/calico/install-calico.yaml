@@ -1,0 +1,15 @@
+- name: Install Calico CNI via Tigera Operator
+  hosts: localhost
+  tasks:
+    - name: Install Tigera Operator
+      command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/tigera-operator.yaml
+
+    - name: Apply APIServer ConfigMap
+      command: kubectl apply -f ./apiserver-configmap.yaml -n tigera-operator
+
+    - name: Apply Calico configuration & APIServer
+      command: kubectl create -f ./calico-custom-resources.yaml
+
+    - name: Stop conflicts with kube-proxy
+      command: calicoctl patch felixconfiguration default --patch='{"spec": {"bpfKubeProxyIptablesCleanupEnabled": false}}'
+  
