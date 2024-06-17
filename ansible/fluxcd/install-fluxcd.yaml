@@ -1,0 +1,11 @@
+- name: Install FluxCD
+  hosts: localhost
+  tasks:
+    - name: Bootstrap FluxCD for our GitHub repository
+      cmd: |
+        flux bootstrap github \
+          --token-auth \
+          --owner=OSable \
+          --repository=infrastructure \
+          --branch=main \
+          --path=clusters/production

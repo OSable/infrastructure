@@ -1,0 +1,6 @@
+- name: Install the Flux CLI
+  hosts: localhost
+  tasks:
+    - name: Install the Flux CLI via bash
+      command: curl -s https://fluxcd.io/install.sh | bash
+      
