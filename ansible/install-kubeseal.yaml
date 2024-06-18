@@ -1,0 +1,11 @@
+- name: Kubeseal installation playbook
+  hosts: localhost
+  tasks:
+    - name: Download the kubeseal binary
+      command: wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.26.3/kubeseal-0.26.3-linux-amd64.tar.gz
+
+    - name: Extract the kubeseal binary
+      command: tar -xvzf kubeseal-0.26.3-linux-amd64.tar.gz
+    
+    - name: Move the kubeseal binary into /usr/local/bin
+      command: install -m 755 kubeseal /usr/local/bin/kubeseal
