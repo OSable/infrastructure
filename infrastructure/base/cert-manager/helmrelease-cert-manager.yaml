@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  chart:
+    spec:
+      chart: cert-manager
+        version: v1.15.0
+        sourceRef:
+          kind: HelmRepository
+          name: jetstack
+          namespace: flux-repository
+  interval: 15m
+  timeout: 5m
+  releaseName: cert-manager
+  valuesFrom:
+    - kind: ConfigMap
+      name: cert-manager-helm-chart-values-override
+      valuesKey: values.yaml
