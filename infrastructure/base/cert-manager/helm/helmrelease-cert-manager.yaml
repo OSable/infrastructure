@@ -11,7 +11,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: jetstack
-        namespace: flux-repository
+        namespace: flux-system
   interval: 15m
   timeout: 5m
   releaseName: cert-manager
