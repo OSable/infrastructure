@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m
-  path: ./infrastructure/production/cert-manager
+  path: ./infrastructure/production/cert-manager/helm
   prune: true
   timeout: 2m
   sourceRef:
