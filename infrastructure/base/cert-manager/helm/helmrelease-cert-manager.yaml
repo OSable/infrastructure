@@ -17,5 +17,5 @@ spec:
   releaseName: cert-manager
   valuesFrom:
     - kind: ConfigMap
-      name: cert-manager-helm-chart-values-override
+      name: cert-manager-helm-chart-value-overrides
       valuesKey: values.yaml
