@@ -6,7 +6,7 @@ metadata:
   labels:
     volume: docker-registry
 spec:
-	storageClassName: local-path
+  storageClassName: local-path
   capacity:
     storage: 10Gi
   accessModes:
