@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: registry-osable-net-cert
+  namespace: osable
+spec:
+  secretName: tls-registry-ingress
+  issuerRef:
+    name: le-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - registry.osable.net

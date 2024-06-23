@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: docker-registry
+    namespace: osable
+    labels:
+        appplication: registry
+   
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            application: registry
+    template:
+        metadata:
+            labels:
+                application: registry
+        spec:
+            containers:
+            - name: registry
+              image: registry:2.6.2
+              
+              volumeMounts:
+              - name: registry-volume
+                mountPath: "/var/lib/registry"
+                
+              - name: certs-volume
+                mountPath: "/certs"
+                readOnly: true
+                
+              - name: auth-volume
+                mountPath: "/auth"
+                readOnly: true
+                
+              env:
+              - name: REGISTRY_AUTH
+                value: "htpasswd"
+              - name: REGISTRY_AUTH_HTPASSWD_REALM
+                value: "Registry Realm"
+              - name: REGISTRY_AUTH_HTPASSWD_PATH
+                value: "/auth/htpasswd"
+              - name: REGISTRY_HTTP_TLS_CERTIFICATE
+                value: "/certs/tls.crt"
+              - name:  REGISTRY_HTTP_TLS_KEY
+                value: "/certs/tls.key"
+                
+              ports:
+              - containerPort: 5000
+                
+            volumes:
+            - name: registry-volume
+              persistentVolumeClaim:
+                claimName: docker-registry-pvc
+            
+            - name: certs-volume
+              secret:
+                secretName: registry-certs-secret
+                
+            - name: auth-volume
+              secret:
+                secretName: registry-auth-secret

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: docker-registry-pv
+  namespace: osable
+  labels:
+    volume: docker-registry
+spec:
+	storageClassName: local-path
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /conf/registry

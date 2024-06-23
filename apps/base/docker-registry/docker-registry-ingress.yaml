@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: docker-registry-ingressroute
+  namespace: osable
+spec:
+  tls:
+    secretName: tls-registry-ingress
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`registry.osable.net`)
+      kind: Rule
+      services:
+        - name: docker-registry
+          port: 5000
+          scheme: https
+          serversTransport: registrytransport
