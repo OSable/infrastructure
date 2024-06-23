@@ -20,32 +20,32 @@ spec:
         - name: registry
           image: registry:2.6.2
 
-        volumeMounts:
-          - name: registry-volume
-            mountPath: "/var/lib/registry"
+          volumeMounts:
+            - name: registry-volume
+              mountPath: "/var/lib/registry"
 
-          - name: certs-volume
-            mountPath: "/certs"
-            readOnly: true
+            - name: certs-volume
+              mountPath: "/certs"
+              readOnly: true
 
-          - name: auth-volume
-            mountPath: "/auth"
-            readOnly: true
+            - name: auth-volume
+              mountPath: "/auth"
+              readOnly: true
 
-        env:
-          - name: REGISTRY_AUTH
-            value: "htpasswd"
-          - name: REGISTRY_AUTH_HTPASSWD_REALM
-            value: "Registry Realm"
-          - name: REGISTRY_AUTH_HTPASSWD_PATH
-            value: "/auth/htpasswd"
-          - name: REGISTRY_HTTP_TLS_CERTIFICATE
-            value: "/certs/tls.crt"
-          - name:  REGISTRY_HTTP_TLS_KEY
-            value: "/certs/tls.key"
+          env:
+            - name: REGISTRY_AUTH
+              value: "htpasswd"
+            - name: REGISTRY_AUTH_HTPASSWD_REALM
+              value: "Registry Realm"
+            - name: REGISTRY_AUTH_HTPASSWD_PATH
+              value: "/auth/htpasswd"
+            - name: REGISTRY_HTTP_TLS_CERTIFICATE
+              value: "/certs/tls.crt"
+            - name:  REGISTRY_HTTP_TLS_KEY
+              value: "/certs/tls.key"
 
-        ports:
-          - containerPort: 5000
+          ports:
+            - containerPort: 5000
 
       volumes:
         - name: registry-volume
