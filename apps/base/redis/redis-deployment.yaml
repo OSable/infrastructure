@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: osable
+  labels:
+    application: redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        application: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.0.10
+          ports:
+            - containerPort: 6379
