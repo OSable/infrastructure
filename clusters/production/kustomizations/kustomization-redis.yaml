@@ -5,7 +5,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m
-  path: ./apps/production/redis
+  dependsOn:
+    - "config--redis"
+  path: ./apps/production/redis/helm
   prune: true 
   timeout: 2m 
   sourceRef:
