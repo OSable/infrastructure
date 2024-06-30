@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 15m
   dependsOn:
-    - "config--mysql"
+    - name: "config--mysql"
   path: ./apps/production/mysql/helm
   prune: true 
   timeout: 2m 

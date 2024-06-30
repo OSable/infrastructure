@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 15m
   dependsOn:
-    - "config--redis"
+    - name: "config--redis"
   path: ./apps/production/redis/helm
   prune: true 
   timeout: 2m 
