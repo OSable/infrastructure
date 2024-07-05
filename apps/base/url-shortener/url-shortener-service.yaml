@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: url-shortener
+  namespace: osable
+spec:
+  type: ClusterIP
+  selector:
+    application: url-shortener
+  ports:
+    - port: 10101
+      targetPort: 10101
