@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core
+  namespace: osable
+  labels:
+    application: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: core
+  template:
+    metadata:
+      labels:
+        application: core
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: core
+          image: registry.osable.net/osable/core:latest
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTID
+              valueFrom:
+                secretKeyRef:
+                  name: core-github-oauth-credentials
+                  key: client-id
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENTSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: core-github-oauth-credentials
+                  key: client-secret
+          ports:
+            - containerPort: 9091
+          
