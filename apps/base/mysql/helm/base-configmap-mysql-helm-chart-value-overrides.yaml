@@ -460,7 +460,9 @@ data:
       ##  - name: TZ
       ##    value: "Europe/Paris"
       ##
-      extraEnvVars: []
+      extraEnvVars:
+        - name: MYSQL_AUTHENTICATION_PLUGIN
+          value: caching_sha2_password
       ## @param primary.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for MySQL primary containers
       ##
       extraEnvVarsCM: ""
