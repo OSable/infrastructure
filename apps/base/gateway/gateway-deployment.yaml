@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: osable
+  labels:
+    application: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: gateway
+  template:
+    metadata:
+      labels:
+        application: gateway
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: gateway
+          image: registry.osable.net/osable/gateway:latest
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
+            - name: SPRING_DATA_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gateway-redis-credentials
+                  key: password
+          ports:
+            - containerPort: 8081

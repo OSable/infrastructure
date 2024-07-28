@@ -1,0 +1,25 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gateway
+  namespace: flux-system
+spec:
+  interval: 15m
+  dependsOn:
+    - name: "traefik"
+    - name: "docker-config"
+    - name: "discovery"
+    - name: "core"
+    - name: "url-shortener"
+    - name: "redis"
+  path: ./apps/production/gateway
+  prune: true 
+  timeout: 2m 
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: gateway
+      namespace: osable

@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  namespace: osable
+  annotations:
+    cert-manager.io/cluster-issuer: "le-issuer"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - osable.net
+        - api.osable.net
+      secretName: osable-ingress-tls
+  rules:
+    - host: osable.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 8081
+    - host: api.osable.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 8081
+      
