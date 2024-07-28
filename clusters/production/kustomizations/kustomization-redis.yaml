@@ -15,6 +15,6 @@ spec:
     name: flux-system
   healthChecks:
     - apiVersion: apps/v1
-      kind: Deployment
-      name: redis
+      kind: StatefulSet
+      name: redis-master
       namespace: osable
