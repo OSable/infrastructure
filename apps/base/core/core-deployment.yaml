@@ -33,6 +33,11 @@ spec:
                 secretKeyRef:
                   name: core-github-oauth-credentials
                   key: client-secret
+            - name: QUESTIONS_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: core-webhook-url
+                  key: url
           ports:
             - containerPort: 9091
           
